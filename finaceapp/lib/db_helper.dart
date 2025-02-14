@@ -33,7 +33,7 @@ class DatabaseHelper {
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
         age INTEGER NOT NULL,
-        diagnosis TEXT NOT NULL
+        bankname TEXT NOT NULL
       )
     ''');
   }
