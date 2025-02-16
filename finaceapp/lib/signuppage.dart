@@ -40,7 +40,8 @@ class _SignUpPageState extends State<SignUpPage> {
         email: email,
         password: password,
         age: age,
-        bankname: bankname);
+        bankname: bankname,
+        balance: 10000.0);
     await DatabaseHelper.instance.insertUser(user);
 
     ScaffoldMessenger.of(context).showSnackBar(

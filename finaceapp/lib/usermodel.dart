@@ -5,6 +5,7 @@ class User {
   final String password;
   final int age;
   final String bankname;
+  double balance;
 
   User({
     this.id,
@@ -13,6 +14,7 @@ class User {
     required this.password,
     required this.age,
     required this.bankname,
+    required this.balance,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class User {
       'password': password,
       'age': age,
       'bankname': bankname,
+      'balance': balance,
     };
   }
 
@@ -34,6 +37,7 @@ class User {
       password: map['password'],
       age: map['age'],
       bankname: map['bankname'],
+      balance: map['balance'],
     );
   }
 }
