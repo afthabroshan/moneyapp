@@ -1,5 +1,8 @@
+import 'package:financeapp/bankpage.dart';
 import 'package:financeapp/db_helper.dart';
+import 'package:financeapp/intrestPage.dart';
 import 'package:financeapp/loginpage.dart';
+import 'package:financeapp/transaction.dart';
 import 'package:flutter/material.dart';
 import 'usermodel.dart';
 
@@ -13,6 +16,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Map<String, double> userAccountbalance = {
+    "HDFC Bank": 50000.0,
+    "SBI Bank": 75000.0,
+  };
+
+  Map<String, List<Map<String, String>>> userAccounts = {
+    "HDFC Bank": [
+      {
+        "type": "Deposit",
+        "amount": "5000",
+        "date": "2025-03-01",
+        "status": "Completed"
+      },
+      {
+        "type": "Withdrawal",
+        "amount": "1000",
+        "date": "2025-02-28",
+        "status": "Completed"
+      },
+    ],
+    "SBI Bank": [
+      {
+        "type": "Deposit",
+        "amount": "7000",
+        "date": "2025-03-02",
+        "status": "Completed"
+      },
+    ],
+  };
   double balance = 0;
   List<String> transactionHistory = [];
   @override
@@ -142,6 +174,15 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => LoginPage()));
             },
+          ),
+          
+          // circle
+          IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              'assets/money_logo.jpg',
+              //  width: 24, height: 24
+            ),
           )
         ],
       ),
@@ -182,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Text("Balance",
+                    Text("Balance (Primary Account)",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
                     SizedBox(height: 5),
@@ -219,6 +260,98 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 173, 173, 173),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => BankListPage()),
+                                );
+                              },
+                              child: Text("Bank")),
+                        ],
+                      ),
+                    )),
+                Container(
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 173, 173, 173),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => InterestPage(
+                                        accounts: userAccountbalance),
+                                  ),
+                                );
+                              },
+                              child: Text("Current Intrest")),
+                        ],
+                      ),
+                    )),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 173, 173, 173),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          TextButton(
+                              onPressed: () {}, child: Text("Budget Map")),
+                        ],
+                      ),
+                    )),
+                Container(
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 173, 173, 173),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TransactionsPage(
+                                          accounts: userAccounts)),
+                                );
+                              },
+                              child: Text("Transactions")),
+                        ],
+                      ),
+                    )),
+              ],
+            ),
+            SizedBox(height: 10),
             Container(
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 173, 173, 173),
@@ -234,7 +367,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
