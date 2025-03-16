@@ -225,15 +225,24 @@
 //     );
 //   }
 // }
+import 'package:financeapp/bank_page.dart';
+import 'package:financeapp/interestpage.dart';
+import 'package:financeapp/loanpage.dart';
+import 'package:financeapp/mainloanpage.dart';
 import 'package:flutter/material.dart';
-import 'loginpage.dart';
-import 'signuppage.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'SignUp_page.dart';
+import 'Login_page.dart';
 import 'package:sqflite/sqflite.dart';
 // import 'package:sqflite_common_ffi/sqflite_common_ffi.dart';
 
-void main() {
-  // sqfliteFfiInit();
-  // databaseFactory = databaseFactoryFfi;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://qtzxbwphrvpmwpiadeuz.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF0enhid3BocnZwbXdwaWFkZXV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5MzEzMjEsImV4cCI6MjA1NzUwNzMyMX0.JVDFZMhGCOcPJQ_i12D2t3ctgLrQRdAqOEryk9MUjvc',
+  );
   runApp(MyApp());
 }
 
@@ -246,7 +255,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: SignUpPage(), // Start with Sign Up page
+      home: MyLogin(), // Start with Sign Up page
     );
   }
 }
